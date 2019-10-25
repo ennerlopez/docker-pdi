@@ -34,6 +34,13 @@ run_spoon() {
 	/data-integration/spoon.sh
 }
 
+run_designer() {
+	custom_properties
+	set_xauth
+	echo /designer/report-designer.sh
+	/designer/report-designer.sh
+}
+
 print_usage() {
 echo "
 
@@ -61,9 +68,13 @@ case "$1" in
 	shift 1
         run_kitchen "$@"
         ;;
+	designer)
+	run_designer
+        ;;
     spoon)
 	run_spoon
         ;;
     *)
         exec "$@"
 esac
+tail -f /dev/null

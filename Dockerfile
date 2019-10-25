@@ -6,9 +6,11 @@ ENV PDI_VERSION=7.1 PDI_BUILD=7.1.0.0-12 \
 	PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data-integration \
 	KETTLE_HOME=/data-integration
 
+
+COPY pdi-ce-8.3.0.0-371.zip pdi-ce-8.3.0.0-371.zip
+
 # Download PDI
-RUN wget --progress=dot:giga http://downloads.sourceforge.net/project/pentaho/Data%20Integration/${PDI_VERSION}/pdi-ce-${PDI_BUILD}.zip \
-	&& unzip -q *.zip \
+RUN unzip -q *.zip \
 	&& rm -f *.zip \
 	&& mkdir /jobs
 

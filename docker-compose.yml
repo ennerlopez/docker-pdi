@@ -7,29 +7,13 @@
 version: '3.1'
 
 services:
-  jaspersrv:
-    image: andrespp/jaspersrv
-    #command: ["seed"]
-    restart: always
-    volumes:
-    - ./data/jasper-data:/usr/local/tomcat/webapps
-    ports:
-      - "80:8080"
-    depends_on:
-      - jaspersrv-db
-    environment:
-      DB_TYPE: postgresql
-      DB_HOST: jaspersrv-db
-      DB_NAME: jasperdb
-      DB_USER: jasperdb_user
-      DB_PASSWORD: my-secret-password
-
-  jaspersrv-db:
-    image: postgres:10
-    restart: always
-    volumes:
-     - ./data/pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: jasperdb
-      POSTGRES_USER: jasperdb_user
-      POSTGRES_PASSWORD: my-secret-password
+    pentaho-tools:
+      build:
+        context: ./
+      environment:
+        - XAUTH=79a9e66926cf9d965240940bca7f8fa9
+        - DISPLAY=${DISPLAY}
+      volumes:
+        - "/tmp/.X11-unix/:/tmp/.X11-unix/:ro"
+        - "./:/jobs"
+        - "/home/enner/proyectos/quarein/dev/tools/prd-ce-7.1.0.0-12/report-designer/:/report-designer"
